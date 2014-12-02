@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class MainPanel extends JPanel {
     
     UserPanel userPanel;
-    UIPanel userInterfacePanel;
+    EnemyPanel userInterfacePanel;
     InfoPanel infoPanel;
     ArrayList<Ship> player;
     ArrayList<Ship> enemy;
@@ -14,7 +14,7 @@ public class MainPanel extends JPanel {
     public MainPanel() {
         
         userPanel = new UserPanel();
-        userInterfacePanel = new UIPanel();
+        userInterfacePanel = new EnemyPanel();
         infoPanel = new InfoPanel();
         player = new ArrayList();
         enemy = new ArrayList();
