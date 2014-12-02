@@ -2,11 +2,11 @@ package battleship;
 
 import javax.swing.*;
 
-public class UIPanel extends JPanel {
+public class EnemyPanel extends JPanel {
     
     
     
-    public UIPanel() {
+    public EnemyPanel() {
         
     }
 }
