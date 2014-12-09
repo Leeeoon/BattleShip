@@ -3,14 +3,18 @@ package battleship;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import javax.swing.*;
 
 public class UserPanel extends JPanel implements ActionListener {
-    
+
     // UserPanel houses the user's ships, and handles how the enemy attacks user
+    
+    Random rand = new Random();
 
     static GridLayout layout;
     JButton[] battleSquare;
+    int enemyTarget;
 
     final static int MAX_BUTTONS = 25;
 
@@ -31,11 +35,6 @@ public class UserPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (int i = 0; i < MAX_BUTTONS; i++) {
 
-            if (e.getSource() == battleSquare[i]) {
-                battleSquare[i].setEnabled(false);
-            }
-        }
     }
 }

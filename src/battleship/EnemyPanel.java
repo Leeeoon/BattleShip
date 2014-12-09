@@ -12,11 +12,7 @@ public class EnemyPanel extends JPanel implements ActionListener {
 
     static GridLayout layout;
     JButton[] battleSquare;
-
-    Random rand = new Random();
-    int shipTracker;
-    int enemyTarget;
-
+    
     final static int MAX_BUTTONS = 25;
 
     public EnemyPanel() {
@@ -37,7 +33,12 @@ public class EnemyPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        for (int i = 0; i < MAX_BUTTONS; i++) {
 
+            if (e.getSource() == battleSquare[i]) {
+                battleSquare[i].setEnabled(false);
+            }
+        }
     }
 
 }
