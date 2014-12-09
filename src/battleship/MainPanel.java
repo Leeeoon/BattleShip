@@ -30,13 +30,15 @@ public class MainPanel extends JPanel {
         add(enemyPanel);
         player = new ArrayList();
         enemy = new ArrayList();
-        //enemyPanel.setEnemyShips();
+        enemyPanel.setEnemyShips();
 
         
     }
     
     public void startGame()
     {
+        
+        
         /*
         do
             move
