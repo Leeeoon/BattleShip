@@ -22,6 +22,7 @@ public class EnemyPanel extends JPanel implements ActionListener {
 
         for (int i = 0; i < MAX_BUTTONS; i++) {
             battleSquare[i] = new JButton();
+            battleSquare[i].addActionListener(this);
             add(battleSquare[i]);
         }
     }
