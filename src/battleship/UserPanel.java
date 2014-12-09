@@ -39,16 +39,9 @@ public class UserPanel extends JPanel implements ActionListener {
 
     public void selectTarget()
     {
-        // Popup window: "Select horizontal or vertical"
-        //JOptionPane.showConfirmDialog(null, "Message", "Horizontal or vertical?", JOptionPane.YES_NO_OPTION);
-        JOptionPane.showOptionDialog(null, 
-        "Do you like this answer?", 
-        "Feedback", 
-        JOptionPane.OK_CANCEL_OPTION, 
-        JOptionPane.INFORMATION_MESSAGE, 
-        null, 
-        new String[]{"Yes I do", "No I don't"}, // this is the array
-        "default");
+        
+        
+        
         
         // Popup window: "Select leftmost space (if horizontal)
         //               or topmost space (if vertical)"
