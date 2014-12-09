@@ -165,6 +165,19 @@ public class EnemyPanel extends JPanel implements ActionListener {
             battleSquare[x].setText("SHIP");
         }
     }
+    
+    /*
+    This method simply generates a space to attack and passes it
+    back up to MainPanel, which will then pass it into UserPanel's 
+    method for handling an enemy attack. It's kind of a backwards
+    way to handle this, but it's the best we could come up with
+    while sticking to the design.
+    */
+    public int selectTarget()
+    {
+        Random rand = new Random();
+        return rand.nextInt(25) + 1;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

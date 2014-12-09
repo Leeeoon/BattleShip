@@ -32,6 +32,23 @@ public class MainPanel extends JPanel {
         enemy = new ArrayList();
         enemyPanel.setEnemyShips();
 
+        /*
+        do
+            move
+        while nobody has won yet
+        */
+        move();
     }
+    
+    /*
+    This method executes one round of moves - one move from
+    the user and one move from the enemy.
+    */
+    public void move()
+    {
+        int spaceToAttack = enemyPanel.selectTarget();
+        userPanel.handleEnemyAttack(spaceToAttack);
+    }
+    
 
 }

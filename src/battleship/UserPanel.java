@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 import javax.swing.*;
+import javax.swing.JComponent;
 
 public class UserPanel extends JPanel implements ActionListener {
 
@@ -15,14 +16,17 @@ public class UserPanel extends JPanel implements ActionListener {
     static GridLayout layout;
     JButton[] battleSquare;
     int enemyTarget;
+    boolean canAttack;
 
     final static int MAX_BUTTONS = 25;
 
     public UserPanel() {
 
         super();
+        
         layout = new GridLayout(5, 5);
         setLayout(layout);
+        canAttack = false;
 
         battleSquare = new JButton[MAX_BUTTONS];
 
@@ -33,8 +37,48 @@ public class UserPanel extends JPanel implements ActionListener {
         }
     }
 
+    public void selectTarget()
+    {
+        // Popup window: "Select horizontal or vertical"
+        //JOptionPane.showConfirmDialog(null, "Message", "Horizontal or vertical?", JOptionPane.YES_NO_OPTION);
+        JOptionPane.showOptionDialog(null, 
+        "Do you like this answer?", 
+        "Feedback", 
+        JOptionPane.OK_CANCEL_OPTION, 
+        JOptionPane.INFORMATION_MESSAGE, 
+        null, 
+        new String[]{"Yes I do", "No I don't"}, // this is the array
+        "default");
+        
+        // Popup window: "Select leftmost space (if horizontal)
+        //               or topmost space (if vertical)"
+        
+        
+        // Set ship
+    }
+    
+    public void handleEnemyAttack(int spaceToAttack)
+    {
+        selectTarget();
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
 
+    }
+    
+    public void enemyAttacks() {
+       
+        // will choose a random square to attack in UserPanel
+        // if there is no ship, canAttack is set to false
+        
+        if (canAttack) {
+            enemyTarget = rand.nextInt(25);
+            battleSquare[enemyTarget].setEnabled(false);
+            System.out.println(enemyTarget);
+            if (!battleSquare[enemyTarget].getText().equals("SHIP")) {
+                canAttack = false;
+            }
+        }
     }
 }
