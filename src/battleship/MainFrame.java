@@ -16,7 +16,7 @@ public class MainFrame extends JFrame {
 
         application.add(mainPanel);
 
-        application.setSize(500, 500);
+        application.setSize(1000, 700);
         application.setVisible(true);
     }
 }
