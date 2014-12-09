@@ -26,160 +26,138 @@ public class EnemyPanel extends JPanel implements ActionListener {
 
         battleSquare = new JButton[MAX_BUTTONS];
 
-        for (int i = 0; i < MAX_BUTTONS; i++) {
-            battleSquare[i] = new JButton();
-            battleSquare[i].addActionListener(this);
-            add(battleSquare[i]);
+        for (int shipNumber = 0; shipNumber < MAX_BUTTONS; shipNumber++) {
+            battleSquare[shipNumber] = new JButton();
+            battleSquare[shipNumber].addActionListener(this);
+            add(battleSquare[shipNumber]);
         }
     }
-
+/*
+ * setEnemyShips uses the random double function, converts it to an integer
+ * USes this to pick a spot on the board and check if it is in use
+ * If it is it resets the 'shipNumber' counter and does that 'shipNumber' over again.
+ * If the location is clean then it is set to the enemyShip array. (Might be useless)
+ * The next step is to get the next portion of the ship on the board. This is where
+ * the cS,eS, and mS, variables come to play. The corner's have two options
+ * the edges have 3 and the center 4.
+ * 
+ * If a second space is used then the ship as a whole is redone(shipNumber.e. two spaces)
+ */
     public void setEnemyShips() {
-        //'i' is the array number
-        for (int i = 0; i < 6; i++) {                                           //'x' is the button number
-            System.out.println("i = " + i);
-            double temp_x = Math.random() * 25;                                 //Finds the first random number out of all
-            int x = (int) temp_x;
-            System.out.println("x = " + x);
-
-         //   if (battleSquare[x].getText().equals("SHIP")) {
-
-              //  i--;
-                //for (int u = 0; u < i; u++) {
-                //       System.out.println("enemyShips[" + u + "]" + " = " + x);
-                //   }
-                //   System.out.println("Recursion i = " + i);
-
-              //  setEnemyShips();
-          //  }
-            battleSquare[x].setText("SHIP");
-
-
-            enemyShips[i] = x;                                                  //Sets the first number of the enemyShip                                                    //Used so that 
-//==========================================================Setting the Ships          
-            double cornerSpot = Math.random() * 2;                               //These are based on the number of options
-            double edgeSpot = Math.random() * 3;
-            double middleSpot = Math.random() * 4;
-            int cS = (int) cornerSpot;                                           //Used for setting the second spot
-            int eS = (int) edgeSpot;
-            int mS = (int) middleSpot;
-
-            i++;
+        for (int shipNumber = 0; shipNumber < 6; shipNumber++) {                
+            double temp = Math.random() * 25;                                 //Finds the first random number out of all
+            int shipLoc = (int) temp;
+            int y = shipLoc;
+            if (battleSquare[shipLoc].getText().equals("SHIP")) {//If the random number is already used then this will reset the 'shipNumber' to redo the attempt
+                shipNumber--;
+            } else {
+                battleSquare[shipLoc].setText("SHIP");
+                enemyShips[shipNumber] = shipLoc;                                              //Sets the first number of the enemyShip                                                    //Used so that 
+//==============================================================================Setting the Ships in random locations        
+                double cornerSpot = Math.random() * 2;                          //These are based on the number of options for each unique location
+                double edgeSpot = Math.random() * 3;
+                double middleSpot = Math.random() * 4;
+                int cS = (int) cornerSpot;                                      //Changing to int
+                int eS = (int) edgeSpot;
+                int mS = (int) middleSpot;
+                shipNumber++;
 //------------------------------------------------------------------------------Four Corners of the gridlayout        
-            if (x == 0) {                                                       //Top Left Corner
-                if (cS == 0) {//To the right 1 button
-                    x++;
-                    enemyShips[i] = x;
-                } else {//Vertically down 1 button
-                    x = 5;
-                    enemyShips[i] = x;
-                }
-//------------------------------------------------------------------------------
-            } else if (x == 4) {                                                //Top Right Corner
-                if (cS == 0) {//To the left 1 button
-                    x--;
-                    enemyShips[i] = x;
-                } else {//Vertically down 1 button
-                    x = x + 5;
-                    enemyShips[i] = x;
-                }
-//------------------------------------------------------------------------------
-            } else if (x == 20) {                                               //Bottom Left Corner
-                if (cS == 0) {//To the left 1 button
-                    x++;
-                    enemyShips[i] = x;
-                } else {//Vertically down 1 button
-                    x = x - 5;
-                    enemyShips[i] = x;
-                }
-//------------------------------------------------------------------------------
-            } else if (x == 24) {                                               //Bottom Right Corner
-                if (cS == 0) {//To the left 1 button
-                    x--;
-                    enemyShips[i] = x;
-                } else {//Vertically down 1 button
-                    x = x - 5;
-                    enemyShips[i] = x;
-                }
-            } //------------------------------------------------------------------------------End of Four Corners
-            //------------------------------------------------------------------------------Checks for Edge Spots
-            else if (x <= 5 || x > 20) {                                        //Checks to see if it is in the top or bottom row
-                if (eS == 0) { //To the left one spot
-                    x++;
-                    enemyShips[i] = x;
-                }
-                if (eS == 1) {//To the right one spot
-                    x--;
-                    enemyShips[i] = x;
-                }
-                if (eS == 2) {                                                  //Adjusts the Veritical of the grid
-                    if (x <= 5) {
-                        x = x + 5;
-                        enemyShips[i] = x;
+                if (shipLoc == 0) {                                                   //Top Left Corner
+                    if (cS == 0) {
+                        shipLoc++;
                     } else {
-                        x = x - 5;
-                        enemyShips[i] = x;
+                        shipLoc = 5;
+                    }
+//------------------------------------------------------------------------------
+                } else if (shipLoc == 4) {                                            //Top Right Corner
+                    if (cS == 0) {
+                        shipLoc--;
+                    } else {
+                        shipLoc = shipLoc + 5;
+                    }
+//------------------------------------------------------------------------------
+                } else if (shipLoc == 20) {                                               //Bottom Left Corner
+                    if (cS == 0) {
+                        shipLoc++;
+                    } else {
+                        shipLoc = shipLoc - 5;
+                    }
+//------------------------------------------------------------------------------
+                } else if (shipLoc == 24) {                                               //Bottom Right Corner
+                    if (cS == 0) {
+                        shipLoc--;
+                    } else {
+                        shipLoc = shipLoc - 5;
+                    }
+                } 
+//------------------------------------------------------------------------------End of Four Corners
+//------------------------------------------------------------------------------Checks for Edge Spots
+                else if (shipLoc <= 5 || shipLoc > 20) {                                        //Checks to see if it is in the top or bottom row
+                    if (eS == 0) { 
+                        shipLoc++;
+                    }
+                    if (eS == 1) {
+                        shipLoc--;
+                    }
+                    if (eS == 2) {                                                 
+                        if (shipLoc <= 5) {
+                            shipLoc = shipLoc + 5;
+                        } else if (eS == 3) {
+                            shipLoc = shipLoc - 5;
+                        }
+                    }
+//------------------------------------------------------------------------------
+                } else if (shipLoc % 5 == 0 || shipLoc == 9 || shipLoc == 14 || shipLoc == 19) { //Left or Right Column
+                    if (eS == 0) { 
+                        shipLoc = shipLoc - 5;
+                    }
+                    if (eS == 1) {
+                        shipLoc = shipLoc + 5;
+                    }
+                    if (eS == 2) {                                              //Adjusts the Veritical of the grid
+                        if (shipLoc % 5 == 0) {
+                            shipLoc++;
+                        } else {
+                            shipLoc--;       
+                        }
+                    }
+                } else {//------------------------------------------------------Middle of the board
+                    if (mS == 0) { //To the right one spot
+                        shipLoc++;
+                    }
+                    if (mS == 1) {//To the left one spot
+                        shipLoc--;
+                    }
+                    if (mS == 2) {//Down one spot
+                        shipLoc = shipLoc + 5;
+                    }
+                    if (mS == 3) {//Up one spot
+                        shipLoc = shipLoc - 5;
                     }
                 }
-//------------------------------------------------------------------------------
-            } else if (x % 5 == 0 || x == 9 || x == 14 || x == 19) {            //Left or Right Column
-                if (eS == 0) { //To the left one spot
-                    x = x - 5;
-                    enemyShips[i] = x;
-                }
-                if (eS == 1) {//To the right one spot
-                    x = x + 5;
-                }
-                enemyShips[i] = x;
-
-                if (eS == 2) {                                                  //Adjusts the Veritical of the grid
-                    if (x % 5 == 0) {
-                        x++;//Selects button to the right
-                        enemyShips[i] = x;
-                    } else {
-                        x--;        //Selects the button to the left
-                        enemyShips[i] = x;
-                    }
-                }
-            } else {//Middle of the board
-                if (eS == 0) { //To the right one spot
-                    x++;
-                }
-                if (eS == 1) {//To the left one spot
-                    x--;
-                }
-                if (eS == 2) {//Down one spot
-                    x = x + 5;
+                if (battleSquare[shipLoc].getText().equals("SHIP")) {                 //if the second spot is used then 
+                    shipNumber = shipNumber - 2;                                                  //this resets the whole ship so that it can be tried again
+                    battleSquare[y].setText(" ");
+                } else {
+                    enemyShips[shipNumber] = shipLoc;
+                    battleSquare[shipLoc].setText("SHIP");
                 }
             }
-            if (eS == 3) {
-                x = x - 5;
-            }
-            enemyShips[i] = x;
-
-           /* if (battleSquare[x].getText().equals("SHIP")) {
-                System.out.println("Battle Square[x] = " + battleSquare[x]);
-                i = i - 2;
-                setEnemyShips();
-            }*/
-            enemyShips[i] = x;
-            battleSquare[x].setText("SHIP");
         }
     }
-    
+
     /*
-    This method simply generates a space to attack and passes it
-    back up to MainPanel, which will then pass it into UserPanel's 
-    method for handling an enemy attack. It's kind of a backwards
-    way to handle this, but it's the best we could come up with
-    while sticking to the design.
-    */
-    public int selectTarget()
-    {
+     This method simply generates a space to attack and passes it
+     back up to MainPanel, which will then pass it into UserPanel's 
+     method for handling an enemy attack. It's kind of a backwards
+     way to handle this, but it's the best we could come up with
+     while sticking to the design.
+     */
+    public int selectTarget() {
         Random rand = new Random();
         return rand.nextInt(25) + 1;
     }
-
-    @Override
+ @Override
     public void actionPerformed(ActionEvent e) {
         for (int i = 0; i < MAX_BUTTONS; i++) {
 
