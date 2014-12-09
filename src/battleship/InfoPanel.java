@@ -8,6 +8,7 @@ public class InfoPanel extends JPanel {
     static GridLayout layout;
     JButton hitDisplay;
     JButton missDisplay;
+    JButton whoseTurn;
     int hit;
     int misses;
 
@@ -15,7 +16,7 @@ public class InfoPanel extends JPanel {
 
         super();
 
-        layout = new GridLayout(2, 1);
+        layout = new GridLayout(3, 1);
         setLayout(layout);
 
         hit = 0;
@@ -23,9 +24,11 @@ public class InfoPanel extends JPanel {
 
         hitDisplay = new JButton("Hits: " + hit);
         missDisplay = new JButton("Misses: " + misses);
+        whoseTurn = new JButton("DANA HERE YOU GO!");
 
         add(hitDisplay);
         add(missDisplay);
+        add(whoseTurn);
 
 
     }
