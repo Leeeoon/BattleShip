@@ -7,6 +7,8 @@ import java.util.Random;
 import javax.swing.*;
 
 public class EnemyPanel extends JPanel implements ActionListener {
+    
+    // EnemyPanel houses the enemies' ships, and handles how user attacks enemy
 
     static GridLayout layout;
     JButton[] battleSquare;

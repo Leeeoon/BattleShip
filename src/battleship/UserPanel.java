@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class UserPanel extends JPanel implements ActionListener {
+    
+    // UserPanel houses the user's ships, and handles how the enemy attacks user
 
     static GridLayout layout;
     JButton[] battleSquare;
