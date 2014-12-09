@@ -41,16 +41,16 @@ public class EnemyPanel extends JPanel implements ActionListener {
             int x = (int) temp_x;
             System.out.println("x = " + x);
 
-            if (battleSquare[x].getText().equals("SHIP")) {
+         //   if (battleSquare[x].getText().equals("SHIP")) {
 
-                i--;
+              //  i--;
                 //for (int u = 0; u < i; u++) {
                 //       System.out.println("enemyShips[" + u + "]" + " = " + x);
                 //   }
                 //   System.out.println("Recursion i = " + i);
 
-                setEnemyShips();
-            }
+              //  setEnemyShips();
+          //  }
             battleSquare[x].setText("SHIP");
 
 
@@ -156,11 +156,11 @@ public class EnemyPanel extends JPanel implements ActionListener {
             }
             enemyShips[i] = x;
 
-            if (battleSquare[x].getText().equals("SHIP")) {
+           /* if (battleSquare[x].getText().equals("SHIP")) {
                 System.out.println("Battle Square[x] = " + battleSquare[x]);
                 i = i - 2;
                 setEnemyShips();
-            }
+            }*/
             enemyShips[i] = x;
             battleSquare[x].setText("SHIP");
         }
