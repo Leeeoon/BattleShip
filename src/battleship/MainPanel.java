@@ -25,10 +25,9 @@ public class MainPanel extends JPanel {
         userPanel = new UserPanel();
         infoPanel = new InfoPanel();
         enemyPanel = new EnemyPanel();
-        add(userPanel);
-        add(infoPanel);
         add(enemyPanel);
-        infoPanel = new InfoPanel();
+        add(infoPanel);
+        add(userPanel);
         player = new ArrayList();
         enemy = new ArrayList();
 

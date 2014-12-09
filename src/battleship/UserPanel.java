@@ -25,12 +25,15 @@ public class UserPanel extends JPanel implements ActionListener {
             battleSquare[i].addActionListener(this);
             add(battleSquare[i]);
         }
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        for (int i = 0; i < MAX_BUTTONS; i++) {
 
+            if (e.getSource() == battleSquare[i]) {
+                battleSquare[i].setEnabled(false);
+            }
+        }
     }
-
 }
