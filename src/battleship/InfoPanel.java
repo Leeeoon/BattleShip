@@ -20,8 +20,8 @@ public class InfoPanel extends JPanel {
         layout = new GridLayout(2, 1);
         setLayout(layout);
         
-        hitDisplay = new JButton();
-        missDisplay = new JButton();
+        hitDisplay = new JButton("Hits: 0");
+        missDisplay = new JButton("Misses: 0");
         
         add(hitDisplay);
         add(missDisplay);
