@@ -24,12 +24,13 @@ public class MainPanel extends JPanel {
 
         userPanel = new UserPanel();
         infoPanel = new InfoPanel();
-        enemyPanel = new EnemyPanel();
+        enemyPanel = new EnemyPanel(infoPanel);
         add(userPanel);
         add(infoPanel);
         add(enemyPanel);
         player = new ArrayList();
         enemy = new ArrayList();
+        enemyPanel.setEnemyShips();
 
     }
 
