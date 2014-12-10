@@ -10,7 +10,6 @@ import javax.swing.JComponent;
 public class UserPanel extends JPanel implements ActionListener {
 
     // UserPanel houses the user's ships, and handles how the enemy attacks user
-    
     Random rand = new Random();
 
     static GridLayout layout;
@@ -20,10 +19,10 @@ public class UserPanel extends JPanel implements ActionListener {
 
     final static int MAX_BUTTONS = 25;
 
-    public UserPanel() {
+    public UserPanel(InfoPanel infoPanel) {
 
         super();
-        
+
         layout = new GridLayout(5, 5);
         setLayout(layout);
         canAttack = false;
@@ -37,42 +36,33 @@ public class UserPanel extends JPanel implements ActionListener {
         }
     }
 
-    public void selectTarget()
-    {
-        
-        
-        
-        
+    public void selectTarget() {
+
         // Popup window: "Select leftmost space (if horizontal)
         //               or topmost space (if vertical)"
-        
-        
         // Set ship
     }
-    
-    public void handleEnemyAttack(int spaceToAttack)
-    {
+
+    public void handleEnemyAttack(int spaceToAttack) {
         selectTarget();
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
     }
-    
+
     public void enemyAttacks() {
-       
+
         // will choose a random square to attack in UserPanel
-        // if there is no ship, canAttack is set to false
         
-        if (canAttack) {
+        enemyTarget = rand.nextInt(25);                     // get a target
+        while (!battleSquare[enemyTarget].isEnabled()) {
+            // check to see if the JButton is enabled
+            // if JButton is not enabled, get a new target
             enemyTarget = rand.nextInt(25);
-            battleSquare[enemyTarget].setEnabled(false);
-            System.out.println(enemyTarget);
-            if (!battleSquare[enemyTarget].getText().equals("SHIP")) {
-                canAttack = false;
-            }
-            
         }
+        battleSquare[enemyTarget].setEnabled(false);
+        System.out.println(enemyTarget);
     }
 }
