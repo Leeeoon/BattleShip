@@ -153,7 +153,7 @@ public class UserPanel extends JPanel implements ActionListener {
     }
 
     public void selectTarget() {
-        infoPanel.whoseTurn.setText("Select an enemy space to attack.");
+        //infoPanel.whoseTurn.setText("Select an enemy space to attack.");
         // pause and wait for user input
         // user selects a spot to hit
     }
