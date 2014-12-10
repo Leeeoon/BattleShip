@@ -22,6 +22,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
     boolean isTimer;
 
+    final static int MAX_HITS = 6;
     final static int MAX_BUTTONS = 25;
 
     public MainPanel() {

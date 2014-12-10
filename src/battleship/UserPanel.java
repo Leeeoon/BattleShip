@@ -169,7 +169,6 @@ public class UserPanel extends JPanel implements ActionListener {
                 enemyTarget = rand.nextInt(25);
             }
             battleSquare[enemyTarget].setEnabled(false);
-            System.out.println(enemyTarget);
             canAttack = false;
 
             if (battleSquare[enemyTarget].getText().equals("SHIP")) {

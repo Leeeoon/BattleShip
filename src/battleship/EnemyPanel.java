@@ -15,7 +15,7 @@ public class EnemyPanel extends JPanel implements ActionListener {
     InfoPanel infoPanel;
     int[] enemyShips = new int[6];                                              // 0 and 1 are one ship, 2 and 3 are the second 
     //ship and 4 and 5 are the last ship
-    
+
     ImageIcon boomIcon;
 
     public EnemyPanel(InfoPanel infoPanel) {
@@ -23,7 +23,7 @@ public class EnemyPanel extends JPanel implements ActionListener {
         super();
         layout = new GridLayout(5, 5);
         setLayout(layout);
-        
+
         boomIcon = new ImageIcon("boom.png");
 
         this.infoPanel = infoPanel;
@@ -31,31 +31,32 @@ public class EnemyPanel extends JPanel implements ActionListener {
         battleSquare = new JButton[MAX_BUTTONS];
 
         for (int shipNumber = 0; shipNumber < MAX_BUTTONS; shipNumber++) {
-            battleSquare[shipNumber] = new JButton();
+            battleSquare[shipNumber] = new JButton("");
             battleSquare[shipNumber].addActionListener(this);
             add(battleSquare[shipNumber]);
         }
     }
-/*
- * setEnemyShips uses the random double function, converts it to an integer
- * USes this to pick a spot on the board and check if it is in use
- * If it is it resets the 'shipNumber' counter and does that 'shipNumber' over again.
- * If the location is clean then it is set to the enemyShip array. (Might be useless)
- * The next step is to get the next portion of the ship on the board. This is where
- * the cS,eS, and mS, variables come to play. The corner's have two options
- * the edges have 3 and the center 4.
- * 
- * If a second space is used then the ship as a whole is redone(shipNumber.e. two spaces)
- */
+    /*
+     * setEnemyShips uses the random double function, converts it to an integer
+     * USes this to pick a spot on the board and check if it is in use
+     * If it is it resets the 'shipNumber' counter and does that 'shipNumber' over again.
+     * If the location is clean then it is set to the enemyShip array. (Might be useless)
+     * The next step is to get the next portion of the ship on the board. This is where
+     * the cS,eS, and mS, variables come to play. The corner's have two options
+     * the edges have 3 and the center 4.
+     * 
+     * If a second space is used then the ship as a whole is redone(shipNumber.e. two spaces)
+     */
+
     public void setEnemyShips() {
-        for (int shipNumber = 0; shipNumber < 6; shipNumber++) {                
+        for (int shipNumber = 0; shipNumber < 6; shipNumber++) {
             double temp = Math.random() * 25;                                 //Finds the first random number out of all
             int shipLoc = (int) temp;
             int y = shipLoc;
-            if (battleSquare[shipLoc].getText().equals("SHIP")) {//If the random number is already used then this will reset the 'shipNumber' to redo the attempt
+            if (battleSquare[shipLoc].getText().equals(" ")) {//If the random number is already used then this will reset the 'shipNumber' to redo the attempt
                 shipNumber--;
             } else {
-                battleSquare[shipLoc].setText("SHIP");
+                battleSquare[shipLoc].setText(" ");
                 enemyShips[shipNumber] = shipLoc;                                              //Sets the first number of the enemyShip                                                    //Used so that 
 //==============================================================================Setting the Ships in random locations        
                 double cornerSpot = Math.random() * 2;                          //These are based on the number of options for each unique location
@@ -93,17 +94,16 @@ public class EnemyPanel extends JPanel implements ActionListener {
                     } else {
                         shipLoc = shipLoc - 5;
                     }
-                } 
-//------------------------------------------------------------------------------End of Four Corners
-//------------------------------------------------------------------------------Checks for Edge Spots
+                } //------------------------------------------------------------------------------End of Four Corners
+                //------------------------------------------------------------------------------Checks for Edge Spots
                 else if (shipLoc <= 5 || shipLoc > 20) {                                        //Checks to see if it is in the top or bottom row
-                    if (eS == 0) { 
+                    if (eS == 0) {
                         shipLoc++;
                     }
                     if (eS == 1) {
                         shipLoc--;
                     }
-                    if (eS == 2) {                                                 
+                    if (eS == 2) {
                         if (shipLoc <= 5) {
                             shipLoc = shipLoc + 5;
                         } else if (eS == 3) {
@@ -112,7 +112,7 @@ public class EnemyPanel extends JPanel implements ActionListener {
                     }
 //------------------------------------------------------------------------------
                 } else if (shipLoc % 5 == 0 || shipLoc == 9 || shipLoc == 14 || shipLoc == 19) { //Left or Right Column
-                    if (eS == 0) { 
+                    if (eS == 0) {
                         shipLoc = shipLoc - 5;
                     }
                     if (eS == 1) {
@@ -122,7 +122,7 @@ public class EnemyPanel extends JPanel implements ActionListener {
                         if (shipLoc % 5 == 0) {
                             shipLoc++;
                         } else {
-                            shipLoc--;       
+                            shipLoc--;
                         }
                     }
                 } else {//------------------------------------------------------Middle of the board
@@ -139,12 +139,12 @@ public class EnemyPanel extends JPanel implements ActionListener {
                         shipLoc = shipLoc - 5;
                     }
                 }
-                if (battleSquare[shipLoc].getText().equals("SHIP")) {                 //if the second spot is used then 
+                if (battleSquare[shipLoc].getText().equals(" ")) {                 //if the second spot is used then 
                     shipNumber = shipNumber - 2;                                                  //this resets the whole ship so that it can be tried again
-                    battleSquare[y].setText(" ");
+                    battleSquare[y].setText("  ");
                 } else {
                     enemyShips[shipNumber] = shipLoc;
-                    battleSquare[shipLoc].setText("SHIP");
+                    battleSquare[shipLoc].setText(" ");
                 }
             }
         }
@@ -161,17 +161,19 @@ public class EnemyPanel extends JPanel implements ActionListener {
         Random rand = new Random();
         return rand.nextInt(25) + 1;
     }
- @Override
+
+    @Override
     public void actionPerformed(ActionEvent e) {
         for (int i = 0; i < MAX_BUTTONS; i++) {
 
             if (e.getSource() == battleSquare[i]) {
                 battleSquare[i].setEnabled(false);
                 //   for (int z = 0; z < 6; z++) {
-                if (battleSquare[i].getText().equals("SHIP")) {
-                    infoPanel.increaseHit();
+                if (battleSquare[i].getText().equals(" ")) {
                     battleSquare[i].setText("");
                     battleSquare[i].setIcon(boomIcon);
+                    infoPanel.increaseHit();
+
                 } else {
                     infoPanel.increaseMiss();
                 }
