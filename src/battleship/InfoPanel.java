@@ -8,7 +8,7 @@ public class InfoPanel extends JPanel {
     static GridLayout layout;
     JButton hitDisplay;
     JButton missDisplay;
-    JButton whoseTurn;
+    JButton instructionsDisplay;
     int hit;
     int misses;
     final static int MAX_SCORE = 6;
@@ -24,13 +24,20 @@ public class InfoPanel extends JPanel {
         hit = 0;
         misses = 0;
 
+        String instructions = "<html><center>Welcome to Battleship!<br>"
+                + "Your ships are on your left, "
+                + "and your enemy's board is on your right.<br>"
+                + "Select an enemy ship to attack, "
+                + "and the enemy will attack one of your ships.<br>"
+                + "The game ends when one player's ships have sunk!</center></html>";
+        
+        instructionsDisplay = new JButton(instructions);
         hitDisplay = new JButton("Hits: " + hit);
         missDisplay = new JButton("Misses: " + misses);
-        whoseTurn = new JButton("DANA HERE YOU GO!");
 
+        add(instructionsDisplay);
         add(hitDisplay);
         add(missDisplay);
-        add(whoseTurn);
 
         
     }
