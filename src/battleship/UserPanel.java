@@ -72,6 +72,7 @@ public class UserPanel extends JPanel implements ActionListener {
             if (!battleSquare[enemyTarget].getText().equals("SHIP")) {
                 canAttack = false;
             }
+            
         }
     }
 }
