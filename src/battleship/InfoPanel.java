@@ -11,6 +11,8 @@ public class InfoPanel extends JPanel {
     JButton whoseTurn;
     int hit;
     int misses;
+    final static int MAX_SCORE = 6;
+    int computerHits;
 
     public InfoPanel() {
 
@@ -36,6 +38,10 @@ public class InfoPanel extends JPanel {
     public void increaseHit() {
         hit++;
         hitDisplay.setText("Hit: " + hit);
+        if(hit == MAX_SCORE){
+            JOptionPane.showMessageDialog(null, "You Won!");
+            System.exit(0);
+        }
     }
 
     public void increaseMiss() {
