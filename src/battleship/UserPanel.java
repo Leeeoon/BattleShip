@@ -19,6 +19,9 @@ public class UserPanel extends JPanel implements ActionListener {
     InfoPanel infoPanel;
     int[] userShips = new int[6];
 
+    int enemyHits;
+
+    final static int MAX_SCORE = 6;
     final static int MAX_BUTTONS = 25;
 
     public UserPanel(InfoPanel infoPanel) {
@@ -30,6 +33,8 @@ public class UserPanel extends JPanel implements ActionListener {
         canAttack = true;
         this.infoPanel = infoPanel;
 
+        enemyHits = 0;
+
         battleSquare = new JButton[MAX_BUTTONS];
 
         for (int i = 0; i < MAX_BUTTONS; i++) {
@@ -37,12 +42,12 @@ public class UserPanel extends JPanel implements ActionListener {
             battleSquare[i].addActionListener(this);
             add(battleSquare[i]);
         }
-        
+
         setup();
     }
-    
+
     public void setup() {
-        for (int shipNumber = 0; shipNumber < 6; shipNumber++) {                
+        for (int shipNumber = 0; shipNumber < 6; shipNumber++) {
             double temp = Math.random() * 25;                                 //Finds the first random number out of all
             int shipLoc = (int) temp;
             int y = shipLoc;
@@ -87,17 +92,16 @@ public class UserPanel extends JPanel implements ActionListener {
                     } else {
                         shipLoc = shipLoc - 5;
                     }
-                } 
-//------------------------------------------------------------------------------End of Four Corners
-//------------------------------------------------------------------------------Checks for Edge Spots
+                } //------------------------------------------------------------------------------End of Four Corners
+                //------------------------------------------------------------------------------Checks for Edge Spots
                 else if (shipLoc <= 5 || shipLoc > 20) {                                        //Checks to see if it is in the top or bottom row
-                    if (eS == 0) { 
+                    if (eS == 0) {
                         shipLoc++;
                     }
                     if (eS == 1) {
                         shipLoc--;
                     }
-                    if (eS == 2) {                                                 
+                    if (eS == 2) {
                         if (shipLoc <= 5) {
                             shipLoc = shipLoc + 5;
                         } else if (eS == 3) {
@@ -106,7 +110,7 @@ public class UserPanel extends JPanel implements ActionListener {
                     }
 //------------------------------------------------------------------------------
                 } else if (shipLoc % 5 == 0 || shipLoc == 9 || shipLoc == 14 || shipLoc == 19) { //Left or Right Column
-                    if (eS == 0) { 
+                    if (eS == 0) {
                         shipLoc = shipLoc - 5;
                     }
                     if (eS == 1) {
@@ -116,7 +120,7 @@ public class UserPanel extends JPanel implements ActionListener {
                         if (shipLoc % 5 == 0) {
                             shipLoc++;
                         } else {
-                            shipLoc--;       
+                            shipLoc--;
                         }
                     }
                 } else {//------------------------------------------------------Middle of the board
@@ -153,26 +157,35 @@ public class UserPanel extends JPanel implements ActionListener {
     public void enemyAttacks() {
 
         // will choose a random square to attack in UserPanel
-        if(canAttack) {
-        enemyTarget = rand.nextInt(25);                     // get a target
-        while (!battleSquare[enemyTarget].isEnabled()) {
+        if (canAttack) {
+            enemyTarget = rand.nextInt(25);                     // get a target
+            while (!battleSquare[enemyTarget].isEnabled()) {
             // check to see if the JButton is enabled
-            // if JButton is not enabled, get a new target
-            enemyTarget = rand.nextInt(25);
+                // if JButton is not enabled, get a new target
+                enemyTarget = rand.nextInt(25);
+            }
+            battleSquare[enemyTarget].setEnabled(false);
+            System.out.println(enemyTarget);
+            canAttack = false;
+
+            if (battleSquare[enemyTarget].getText().equals("SHIP")) {
+                enemyHits++;
+            }
+            if (enemyHits == MAX_SCORE) {
+                JOptionPane.showMessageDialog(null, "You Lost!");
+                System.exit(0);
+            }
         }
-        battleSquare[enemyTarget].setEnabled(false);
-        System.out.println(enemyTarget);
-        canAttack = false;
-    }
 
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         for (int i = 0; i < MAX_BUTTONS; i++) {
             if (e.getSource() == battleSquare[i]) {
-                
+
             }
         }
-        
+
     }
 }
