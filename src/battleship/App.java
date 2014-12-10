@@ -12,7 +12,7 @@ public class App {
     public static void main(String[] args) {
     
         mainFrame = new MainFrame();
-        mainFrame.mainPanel.startGame();
+        //mainFrame.mainPanel.startGame();
     }
     
 }

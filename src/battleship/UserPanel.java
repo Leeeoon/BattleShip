@@ -27,7 +27,7 @@ public class UserPanel extends JPanel implements ActionListener {
 
         layout = new GridLayout(5, 5);
         setLayout(layout);
-        canAttack = false;
+        canAttack = true;
         this.infoPanel = infoPanel;
 
         battleSquare = new JButton[MAX_BUTTONS];
@@ -153,7 +153,7 @@ public class UserPanel extends JPanel implements ActionListener {
     public void enemyAttacks() {
 
         // will choose a random square to attack in UserPanel
-        
+        if(canAttack) {
         enemyTarget = rand.nextInt(25);                     // get a target
         while (!battleSquare[enemyTarget].isEnabled()) {
             // check to see if the JButton is enabled
@@ -162,8 +162,10 @@ public class UserPanel extends JPanel implements ActionListener {
         }
         battleSquare[enemyTarget].setEnabled(false);
         System.out.println(enemyTarget);
+        canAttack = false;
     }
 
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         for (int i = 0; i < MAX_BUTTONS; i++) {
