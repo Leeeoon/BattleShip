@@ -32,7 +32,7 @@ public class InfoPanel extends JPanel {
         add(missDisplay);
         add(whoseTurn);
 
-
+        
     }
 
     public void increaseHit() {

@@ -13,6 +13,8 @@ public class MainPanel extends JPanel {
     InfoPanel infoPanel;
     ArrayList<Ship> player;
     ArrayList<Ship> enemy;
+    boolean someoneWon = false;
+    Timer tim;
 
     public MainPanel() {
 
@@ -31,16 +33,15 @@ public class MainPanel extends JPanel {
         enemy = new ArrayList();
         enemyPanel.setEnemyShips();
 
+        tim = new Timer(100, this);
     }
 
     public void startGame() {
 
-        /*
-         do
-         move
-         while nobody has won yet
-         */
-        move();
+        while (!someoneWon) // this never changes
+        {
+            move();
+        }
     }
 
     /*
@@ -48,8 +49,14 @@ public class MainPanel extends JPanel {
      the user and one move from the enemy.
      */
     public void move() {
-        int spaceToAttack = enemyPanel.selectTarget();
-        userPanel.handleEnemyAttack(spaceToAttack);
+        // User moves
+        userPanel.selectTarget();
+        
+        if (!someoneWon)
+        {
+            // Enemy moves
+            userPanel.enemyAttacks();
+        }
     }
 
 }
