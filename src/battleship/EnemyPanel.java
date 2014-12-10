@@ -15,12 +15,16 @@ public class EnemyPanel extends JPanel implements ActionListener {
     InfoPanel infoPanel;
     int[] enemyShips = new int[6];                                              // 0 and 1 are one ship, 2 and 3 are the second 
     //ship and 4 and 5 are the last ship
+    
+    ImageIcon boomIcon;
 
     public EnemyPanel(InfoPanel infoPanel) {
 
         super();
         layout = new GridLayout(5, 5);
         setLayout(layout);
+        
+        boomIcon = new ImageIcon("boom.png");
 
         this.infoPanel = infoPanel;
 
@@ -166,7 +170,8 @@ public class EnemyPanel extends JPanel implements ActionListener {
                 //   for (int z = 0; z < 6; z++) {
                 if (battleSquare[i].getText().equals("SHIP")) {
                     infoPanel.increaseHit();
-
+                    battleSquare[i].setText("");
+                    battleSquare[i].setIcon(boomIcon);
                 } else {
                     infoPanel.increaseMiss();
                 }

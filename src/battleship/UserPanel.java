@@ -21,6 +21,8 @@ public class UserPanel extends JPanel implements ActionListener {
 
     int enemyHits;
 
+    ImageIcon boomIcon;
+
     final static int MAX_SCORE = 6;
     final static int MAX_BUTTONS = 25;
 
@@ -31,6 +33,8 @@ public class UserPanel extends JPanel implements ActionListener {
         layout = new GridLayout(5, 5);
         setLayout(layout);
         canAttack = true;
+        
+        boomIcon = new ImageIcon("boom.png");
         this.infoPanel = infoPanel;
 
         enemyHits = 0;
@@ -160,7 +164,7 @@ public class UserPanel extends JPanel implements ActionListener {
         if (canAttack) {
             enemyTarget = rand.nextInt(25);                     // get a target
             while (!battleSquare[enemyTarget].isEnabled()) {
-            // check to see if the JButton is enabled
+                // check to see if the JButton is enabled
                 // if JButton is not enabled, get a new target
                 enemyTarget = rand.nextInt(25);
             }
@@ -170,6 +174,8 @@ public class UserPanel extends JPanel implements ActionListener {
 
             if (battleSquare[enemyTarget].getText().equals("SHIP")) {
                 enemyHits++;
+                battleSquare[enemyTarget].setText("");
+                battleSquare[enemyTarget].setIcon(boomIcon);
             }
             if (enemyHits == MAX_SCORE) {
                 JOptionPane.showMessageDialog(null, "You Lost!");
