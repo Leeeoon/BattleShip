@@ -6,9 +6,10 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 import javax.swing.*;
 
+// EnemyPanel houses the enemies' ships, and handles how user attacks enemy
 public class EnemyPanel extends JPanel implements ActionListener {
 
-    // EnemyPanel houses the enemies' ships, and handles how user attacks enemy
+    
     static GridLayout layout;
     JButton[] battleSquare;
     final static int MAX_BUTTONS = 25;
@@ -36,119 +37,7 @@ public class EnemyPanel extends JPanel implements ActionListener {
             add(battleSquare[shipNumber]);
         }
     }
-    /*
-     * setEnemyShips uses the random double function, converts it to an integer
-     * USes this to pick a spot on the board and check if it is in use
-     * If it is it resets the 'shipNumber' counter and does that 'shipNumber' over again.
-     * If the location is clean then it is set to the enemyShip array. (Might be useless)
-     * The next step is to get the next portion of the ship on the board. This is where
-     * the cS,eS, and mS, variables come to play. The corner's have two options
-     * the edges have 3 and the center 4.
-     * 
-     * If a second space is used then the ship as a whole is redone(shipNumber.e. two spaces)
-     */
-
-    public void setEnemyShips() {
-        for (int shipNumber = 0; shipNumber < 6; shipNumber++) {
-            double temp = Math.random() * 25;                                 //Finds the first random number out of all
-            int shipLoc = (int) temp;
-            int y = shipLoc;
-            if (battleSquare[shipLoc].getText().equals(" ")) {//If the random number is already used then this will reset the 'shipNumber' to redo the attempt
-                shipNumber--;
-            } else {
-                battleSquare[shipLoc].setText(" ");
-                enemyShips[shipNumber] = shipLoc;                                              //Sets the first number of the enemyShip                                                    //Used so that 
-//==============================================================================Setting the Ships in random locations        
-                double cornerSpot = Math.random() * 2;                          //These are based on the number of options for each unique location
-                double edgeSpot = Math.random() * 3;
-                double middleSpot = Math.random() * 4;
-                int cS = (int) cornerSpot;                                      //Changing to int
-                int eS = (int) edgeSpot;
-                int mS = (int) middleSpot;
-                shipNumber++;
-//------------------------------------------------------------------------------Four Corners of the gridlayout        
-                if (shipLoc == 0) {                                                   //Top Left Corner
-                    if (cS == 0) {
-                        shipLoc++;
-                    } else {
-                        shipLoc = 5;
-                    }
-//------------------------------------------------------------------------------
-                } else if (shipLoc == 4) {                                            //Top Right Corner
-                    if (cS == 0) {
-                        shipLoc--;
-                    } else {
-                        shipLoc = shipLoc + 5;
-                    }
-//------------------------------------------------------------------------------
-                } else if (shipLoc == 20) {                                               //Bottom Left Corner
-                    if (cS == 0) {
-                        shipLoc++;
-                    } else {
-                        shipLoc = shipLoc - 5;
-                    }
-//------------------------------------------------------------------------------
-                } else if (shipLoc == 24) {                                               //Bottom Right Corner
-                    if (cS == 0) {
-                        shipLoc--;
-                    } else {
-                        shipLoc = shipLoc - 5;
-                    }
-                } //------------------------------------------------------------------------------End of Four Corners
-                //------------------------------------------------------------------------------Checks for Edge Spots
-                else if (shipLoc <= 5 || shipLoc > 20) {                                        //Checks to see if it is in the top or bottom row
-                    if (eS == 0) {
-                        shipLoc++;
-                    }
-                    if (eS == 1) {
-                        shipLoc--;
-                    }
-                    if (eS == 2) {
-                        if (shipLoc <= 5) {
-                            shipLoc = shipLoc + 5;
-                        } else if (eS == 3) {
-                            shipLoc = shipLoc - 5;
-                        }
-                    }
-//------------------------------------------------------------------------------
-                } else if (shipLoc % 5 == 0 || shipLoc == 9 || shipLoc == 14 || shipLoc == 19) { //Left or Right Column
-                    if (eS == 0) {
-                        shipLoc = shipLoc - 5;
-                    }
-                    if (eS == 1) {
-                        shipLoc = shipLoc + 5;
-                    }
-                    if (eS == 2) {                                              //Adjusts the Veritical of the grid
-                        if (shipLoc % 5 == 0) {
-                            shipLoc++;
-                        } else {
-                            shipLoc--;
-                        }
-                    }
-                } else {//------------------------------------------------------Middle of the board
-                    if (mS == 0) { //To the right one spot
-                        shipLoc++;
-                    }
-                    if (mS == 1) {//To the left one spot
-                        shipLoc--;
-                    }
-                    if (mS == 2) {//Down one spot
-                        shipLoc = shipLoc + 5;
-                    }
-                    if (mS == 3) {//Up one spot
-                        shipLoc = shipLoc - 5;
-                    }
-                }
-                if (battleSquare[shipLoc].getText().equals(" ")) {                 //if the second spot is used then 
-                    shipNumber = shipNumber - 2;                                                  //this resets the whole ship so that it can be tried again
-                    battleSquare[y].setText("  ");
-                } else {
-                    enemyShips[shipNumber] = shipLoc;
-                    battleSquare[shipLoc].setText(" ");
-                }
-            }
-        }
-    }
+    
 
     /*
      This method simply generates a space to attack and passes it

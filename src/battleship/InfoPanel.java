@@ -5,12 +5,25 @@ import javax.swing.*;
 
 public class InfoPanel extends JPanel {
 
+    /*
+    There was nothing in the design about how we should display
+    our information graphically; thus, we added graphic elements
+    */
     static GridLayout layout;
     JButton hitDisplay;
     JButton missDisplay;
     JButton instructionsDisplay;
+    
+    /*
+    These were in the design
+    */
     int hit;
     int misses;
+    
+    /*
+    These were not in the design but were needed to check
+    in case the computer won
+    */
     final static int MAX_SCORE = 6;
     int computerHits;
 
@@ -42,6 +55,8 @@ public class InfoPanel extends JPanel {
         
     }
 
+    // This was adapted from setHits
+    // The second line in this method eliminated the need for getHits
     public void increaseHit() {
         hit++;
         hitDisplay.setText("Hit: " + hit);
@@ -51,6 +66,8 @@ public class InfoPanel extends JPanel {
         }
     }
 
+    // This was adapted from setMisses
+    // The second line in this method eliminated the need for getMisses
     public void increaseMiss() {
         misses++;
         missDisplay.setText("Misses: " + misses);
